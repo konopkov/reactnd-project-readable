@@ -1,5 +1,22 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.categories-list > ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: flex-start;
+    width: 300px;
+}
+
+.categories-list > ul > li {
+    flex: 1 1 auto;
+}
+
+.posts-list > ul {
+    display: flex;
+    list-style-type: none;
+    flex-direction: column;
 }
