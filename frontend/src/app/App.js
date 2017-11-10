@@ -29,6 +29,13 @@ class App extends Component {
                         <Post id={match.params.id}/>
                     )}
                 />
+                <Route
+                    path='/category/:id'
+                    render={({ match }) => (
+                        <Root category={match.params.id}/>
+                    )}
+                />
+
             </div>
         )
     }

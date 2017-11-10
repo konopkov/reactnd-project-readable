@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom';
 
 import CategoriesList from '../category/CategoriesList';
-import PostsList from '../post/PostsList';
-import {fetchPosts, fetchCategories, sortPosts, SortingMethods} from "../root/actions";
+import {fetchCategories} from "../root/actions";
 
 
 class Root extends Component {
@@ -21,9 +21,7 @@ class Root extends Component {
 
             <div className="main-navbar">
                 <div className="main-navbar__section main-navbar__section_left">
-                    <a href="/" className="logo">
-                        Readable
-                    </a>
+                    <Link className='logo' to='/'>Readable</Link>
                     <CategoriesList
                         categories={this.props.categories}
                     />
@@ -31,7 +29,7 @@ class Root extends Component {
                 </div>
 
                 <div className="main-navbar__section main-navbar__section_right">
-                    <a href='/posts/new' className="btn btn_x-large btn_navbar_new-post">New post</a>
+                    <Link className='btn btn_x-large btn_navbar_new-post' to='/posts/new'>New post</Link>
                 </div>
             </div>
         )

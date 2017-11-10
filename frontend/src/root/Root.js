@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import NavBar from '../nav/NavBar';
 import PostsList from '../post/PostsList';
-import {fetchPosts, fetchCategories, sortPosts, SortingMethods} from "./actions";
+import {fetchPosts, sortPosts, SortingMethods} from "./actions";
 
 
 class Root extends Component {
@@ -14,22 +14,29 @@ class Root extends Component {
 
     componentDidMount() {
         this.props.fetchPosts();
-        this.props.fetchCategories();
     }
 
     orderPosts() {
-        console.log('ordering');
+
+        let posts = [];
+        if (this.props.category) {
+            posts = this.props.posts.filter((post) => post.category === this.props.category)
+        } else {
+            posts = this.props.posts
+        }
+
+
         switch (this.props.sortingOrder) {
             case SortingMethods.VOTE_SCORE:
-                return this.props.posts.sort((post1, post2) => {
+                return posts.sort((post1, post2) => {
                     return post2.voteScore - post1.voteScore
                 });
             case SortingMethods.TIMESTAMP:
-                return this.props.posts.sort((post1, post2) => {
+                return posts.sort((post1, post2) => {
                     return post2.timestamp - post1.timestamp
                 });
             default:
-                return this.props.posts
+                return posts
         }
     }
 
@@ -67,8 +74,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchPosts: () => dispatch(fetchPosts()),
         sortPostsByVoteScore: (e) => dispatch(sortPosts(SortingMethods.VOTE_SCORE)),
-        sortPostsByTimestamp: (e) => dispatch(sortPosts(SortingMethods.TIMESTAMP)),
-        fetchCategories: () => dispatch(fetchCategories())
+        sortPostsByTimestamp: (e) => dispatch(sortPosts(SortingMethods.TIMESTAMP))
     }
 };
 
