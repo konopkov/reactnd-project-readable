@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Route} from 'react-router-dom'
 
 import Root from '../root/Root'
+import Post from '../post/Post'
 
 import './App.css'
 
@@ -19,8 +20,13 @@ class App extends Component {
                 <Route
                     exact path='/'
                     render={() => (
-                        <Root
-                        />
+                        <Root/>
+                    )}
+                />
+                <Route
+                    path='/posts/:id'
+                    render={({ match }) => (
+                        <Post id={match.params.id}/>
                     )}
                 />
             </div>

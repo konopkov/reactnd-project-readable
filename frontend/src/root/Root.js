@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 
-import CategoriesList from '../category/CategoriesList';
+import NavBar from '../nav/NavBar';
 import PostsList from '../post/PostsList';
 import {fetchPosts, fetchCategories, sortPosts, SortingMethods} from "./actions";
 
@@ -10,7 +10,6 @@ class Root extends Component {
 
     constructor(props) {
         super(props);
-        // this.orderPosts = this.orderPosts.bind(this);
     }
 
     componentDidMount() {
@@ -37,9 +36,7 @@ class Root extends Component {
     render() {
         return (
             <div className='layout'>
-                <CategoriesList
-                    categories={this.props.categories}
-                />
+                <NavBar/>
                 <ul className='sorting-panel'>
                     <button className={`btn sorting-panel__button ${this.props.sortingOrder === SortingMethods.VOTE_SCORE ? 'sorting-panel__button_active' : ''} `}
                             onClick={this.props.sortPostsByVoteScore}>

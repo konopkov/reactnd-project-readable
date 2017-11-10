@@ -9,12 +9,17 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    min-width: 1024px;
+    min-width: 600px;
     width: 100%;
     height: 100%;
     border-spacing: 0;
     border-collapse: collapse;
     background: #fff;
+    padding-left: 40px;
+}
+
+a {
+    text-decoration: none;
 }
 
 .btn {
@@ -24,21 +29,21 @@ body {
     box-shadow: none;
     width: auto;
     font-weight: 500;
+    line-height:35px;
 }
 
 .content-list {
     margin: 0;
+    padding-left: 0;
     list-style: none;
 }
 
 .content-list__item {
-    position: relative;
     box-sizing: border-box;
-    padding: 10px 0 14px;
 }
 
 .content-list__item_post {
-    padding: 20px 0;
+    padding-top: 20px;
 }
 
 .categories_list > ul {
@@ -147,7 +152,6 @@ body {
     width: 200px;
     margin: 0;
     padding: 0;
-    margin-left: 40px;
     border: 1px solid #e5e9eb;
     height: 40px;
 }
@@ -161,4 +165,35 @@ body {
 
 .sorting-panel__button_active {
     font-weight: 700;
+}
+
+.main-navbar {
+    display: flex;
+    height: 68px;
+    box-sizing: border-box;
+}
+
+.main-navbar__section {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.btn_x-large {
+    padding: 0 13px;
+    height: 36px;
+}
+
+.btn_navbar_new-post {
+    color: #444;
+    border: 1px solid #444;
+    box-shadow: none;
+    margin-left: 10px;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.17em;
+    color: #444;
+    margin-right: 25px;
 }

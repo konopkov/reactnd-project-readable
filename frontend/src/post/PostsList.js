@@ -1,5 +1,5 @@
 import React from 'react'
-import Post from './Post'
+import PostBody from './PostBody'
 
 
 const PostsList = ({posts}) => {
@@ -11,7 +11,9 @@ const PostsList = ({posts}) => {
         <div className='posts_list'>
             <ul className='content-list content-list_posts'>
                 {posts.map((post) => (
-                    <Post key={post.id} post={post}/>
+                    <li className='content-list__item content-list__item_post' key={post.id}>
+                        <PostBody key={post.id} post={post}/>
+                    </li>
                 ))}
             </ul>
         </div>

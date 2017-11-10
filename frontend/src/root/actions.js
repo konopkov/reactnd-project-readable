@@ -2,6 +2,7 @@ import * as PostsAPIUtil from '../utils/api';
 
 
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
+export const RECEIVE_POST = "RECEIVE_POST";
 export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES";
 export const SORT_POSTS = "SORT_POSTS";
 export const ADD_POST = 'ADD_POST';
@@ -14,6 +15,11 @@ export const SortingMethods = {
 export const receivePosts = posts => ({
     type: RECEIVE_POSTS,
     posts
+});
+
+export const receivePost = post => ({
+    type: RECEIVE_POST,
+    post
 });
 
 export const sortPosts = sortMethod => ({
@@ -29,6 +35,11 @@ export const receiveCategories = categories => ({
 export const fetchPosts = () => dispatch => (
     PostsAPIUtil.fetchPosts()
         .then(posts => dispatch(receivePosts(posts)))
+);
+
+export const fetchPost = (id) => dispatch => (
+    PostsAPIUtil.fetchPost(id)
+        .then(post => dispatch(receivePost(post)))
 );
 
 export const fetchCategories = () => dispatch => (
