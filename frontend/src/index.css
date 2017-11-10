@@ -2,21 +2,143 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    color: #333;
 }
 
-.categories-list > ul {
+.layout {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 1024px;
+    width: 100%;
+    height: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+.btn {
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+    width: auto;
+    font-weight: 500;
+}
+
+.content-list {
+    margin: 0;
+    list-style: none;
+}
+
+.content-list__item {
+    position: relative;
+    box-sizing: border-box;
+    padding: 10px 0 14px;
+}
+
+.content-list__item_post {
+    padding: 20px 0;
+}
+
+.categories_list > ul {
     display: flex;
     list-style-type: none;
     justify-content: flex-start;
     width: 300px;
 }
 
-.categories-list > ul > li {
+.categories_list > ul > li {
     flex: 1 1 auto;
 }
 
-.posts-list > ul {
+.category_link {
+    color: #444;
+    text-decoration: none;
+}
+
+.posts_list > ul {
     display: flex;
     list-style-type: none;
     flex-direction: column;
+}
+
+.post__title {
+    margin: 0;
+    margin-bottom: 9px;
+}
+
+.post__title_link {
+    margin: 0;
+    font-weight: 500;
+    font-size: 28px;
+    color: #444;
+    text-decoration: none;
+}
+
+.post__meta {
+    display: flex;
+    font-size: 13px;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.user-info__nickname {
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+.post__time {
+    font-weight: 500;
+    color: #5f5f5f;
+    margin-left: 8px;
+}
+
+.post__category {
+    margin: 0;
+    margin-bottom: 9px;
+}
+
+.post__category_link {
+    font-size: 13px;
+    color: #5e6973;
+    text-decoration: none;
+}
+
+.post__body {
+    padding-top: 20px;
+    margin-bottom: 32px;
+}
+
+.post-stats {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    list-style: none;
+    border: 1px solid #e5e9eb;
+    height: 40px;
+}
+
+.voting-panel__counter {
+    min-width: 38px;
+    font-weight: 700;
+}
+
+.voting-panel__button {
+    width: 38px;
+    padding: 0;
+    margin: 0;
+}
+
+.post-stats__comments-count, .post-stats__comments-text {
+    font-weight: 700;
+    margin-left: 8px;
+}
+
+.post-stats__item_comments {
+    margin-left: 20px;
+    margin-right: 4px;
 }

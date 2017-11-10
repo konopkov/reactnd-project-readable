@@ -8,13 +8,13 @@ const CategoriesList = ({ categories }) => {
     }
 
     return (
-        <div className='categories-list'>
+        <div className='categories_list'>
             <h2>Categories</h2>
             <ul>
                 {categories.map((category) => (
                     <li key={category.name}>
-                        <h3 className='post-title'>
-                            <Link to={`/category/${category.path}`}>{category.name}</Link>
+                        <h3 className='category_title'>
+                            <Link className='category_link' to={`/category/${category.path}`}>{category.name}</Link>
                         </h3>
                     </li>
                 ))}

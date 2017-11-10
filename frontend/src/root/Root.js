@@ -18,7 +18,7 @@ class Root extends Component {
 
     render() {
         return (
-            <div>
+            <div className='layout'>
                 <CategoriesList
                     categories={this.props.categories}
                 />
