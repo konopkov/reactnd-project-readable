@@ -1,17 +1,27 @@
 import {combineReducers} from 'redux'
-import {RECEIVE_POSTS, RECEIVE_CATEGORIES} from './actions'
+import {RECEIVE_POSTS, RECEIVE_CATEGORIES, SORT_POSTS, SortingMethods} from './actions'
 
-const posts = (state = {posts:[]}, action) => {
+
+const posts = (state = {posts: [], sortingOrder: SortingMethods.VOTE_SCORE}, action) => {
 
     switch (action.type) {
         case RECEIVE_POSTS:
-            return {...state, posts: action.posts};
+
+            return {
+                ...state, sortingOrder: SortingMethods.VOTE_SCORE, posts: action.posts
+            };
+
+        case SORT_POSTS:
+
+            return {...state, sortingOrder: action.sortMethod};
+
         default:
+
             return state
     }
 };
 
-const categories = (state = {categories:[]}, action) => {
+const categories = (state = {categories: []}, action) => {
 
     switch (action.type) {
         case RECEIVE_CATEGORIES:

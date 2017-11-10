@@ -9,7 +9,6 @@ const CategoriesList = ({ categories }) => {
 
     return (
         <div className='categories_list'>
-            <h2>Categories</h2>
             <ul>
                 {categories.map((category) => (
                     <li key={category.name}>

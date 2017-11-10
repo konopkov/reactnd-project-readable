@@ -3,17 +3,35 @@ import {connect} from 'react-redux'
 
 import CategoriesList from '../category/CategoriesList';
 import PostsList from '../post/PostsList';
-import {fetchPosts, fetchCategories} from "./actions";
+import {fetchPosts, fetchCategories, sortPosts, SortingMethods} from "./actions";
+
 
 class Root extends Component {
 
     constructor(props) {
         super(props);
+        // this.orderPosts = this.orderPosts.bind(this);
     }
 
     componentDidMount() {
         this.props.fetchPosts();
         this.props.fetchCategories();
+    }
+
+    orderPosts() {
+        console.log('ordering');
+        switch (this.props.sortingOrder) {
+            case SortingMethods.VOTE_SCORE:
+                return this.props.posts.sort((post1, post2) => {
+                    return post2.voteScore - post1.voteScore
+                });
+            case SortingMethods.TIMESTAMP:
+                return this.props.posts.sort((post1, post2) => {
+                    return post2.timestamp - post1.timestamp
+                });
+            default:
+                return this.props.posts
+        }
     }
 
     render() {
@@ -22,28 +40,40 @@ class Root extends Component {
                 <CategoriesList
                     categories={this.props.categories}
                 />
+                <ul className='sorting-panel'>
+                    <button className={`btn sorting-panel__button ${this.props.sortingOrder === SortingMethods.VOTE_SCORE ? 'sorting-panel__button_active' : ''} `}
+                            onClick={this.props.sortPostsByVoteScore}>
+                        By Votes
+                    </button>
+                    <button className={`btn sorting-panel__button ${this.props.sortingOrder === SortingMethods.TIMESTAMP ? 'sorting-panel__button_active' : ''} `}
+                            onClick={this.props.sortPostsByTimestamp}>
+                        By Time
+                    </button>
+                </ul>
                 <PostsList
-                    posts={this.props.posts}
+                    posts={this.orderPosts()}
                 />
             </div>
         )
     }
 }
 
-function mapStateToProps ({ posts, categories }) {
-
+const mapStateToProps = (state) => {
     return {
-        posts: posts.posts,
-        categories: categories.categories
+        posts: state.posts.posts,
+        categories: state.categories.categories,
+        sortingOrder: state.posts.sortingOrder
     }
-}
+};
 
-function mapDispatchToProps (dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
-        fetchPosts: (data) => dispatch(fetchPosts()),
-        fetchCategories: (data) => dispatch(fetchCategories())
+        fetchPosts: () => dispatch(fetchPosts()),
+        sortPostsByVoteScore: (e) => dispatch(sortPosts(SortingMethods.VOTE_SCORE)),
+        sortPostsByTimestamp: (e) => dispatch(sortPosts(SortingMethods.TIMESTAMP)),
+        fetchCategories: () => dispatch(fetchCategories())
     }
-}
+};
 
 export default connect(
     mapStateToProps,
