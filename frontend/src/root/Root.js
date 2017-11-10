@@ -1,23 +1,51 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux'
 
 import CategoriesList from '../category/CategoriesList';
 import PostsList from '../post/PostsList';
+import {fetchPosts, fetchCategories} from "./actions";
 
-const Root = (props) => {
+class Root extends Component {
 
-    const categories = props.categories;
-    const posts = props.posts;
+    constructor(props) {
+        super(props);
+    }
 
-    return (
-        <div>
-            <CategoriesList
-                categories={categories}
-            />
-            <PostsList
-                posts={posts}
-            />
-        </div>
-    )
-};
+    componentDidMount() {
+        this.props.fetchPosts();
+        this.props.fetchCategories();
+    }
 
-export default Root
+    render() {
+        return (
+            <div>
+                <CategoriesList
+                    categories={this.props.categories}
+                />
+                <PostsList
+                    posts={this.props.posts}
+                />
+            </div>
+        )
+    }
+}
+
+function mapStateToProps ({ posts, categories }) {
+
+    return {
+        posts: posts.posts,
+        categories: categories.categories
+    }
+}
+
+function mapDispatchToProps (dispatch) {
+    return {
+        fetchPosts: (data) => dispatch(fetchPosts()),
+        fetchCategories: (data) => dispatch(fetchCategories())
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Root)

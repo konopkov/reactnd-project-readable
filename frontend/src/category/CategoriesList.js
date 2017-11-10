@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 const CategoriesList = ({ categories }) => {
     if (categories.length === 0) {
-        return <p>Your search has 0 results.</p>
+        return <p>No categories</p>
     }
 
     return (

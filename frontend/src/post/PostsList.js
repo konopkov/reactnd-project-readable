@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 const PostsList = ({posts}) => {
     if (posts.length === 0) {
-        return <p>Your search has 0 results.</p>
+        return <p>No posts</p>
     }
 
     return (
