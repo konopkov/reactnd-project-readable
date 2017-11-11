@@ -8,6 +8,7 @@ export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 export const SORT_POSTS = 'SORT_POSTS';
 export const SORT_COMMENTS = 'SORT_COMMENTS';
 export const ADD_POST = 'ADD_POST';
+export const ADD_COMMENT = 'ADD_COMMENT';
 export const VOTE_POST = 'VOTE_POST';
 export const VOTE_COMMENT = 'VOTE_COMMENT';
 
@@ -46,6 +47,11 @@ export const voteComment = (id, vote) => ({
     type: VOTE_COMMENT,
     id,
     vote
+});
+
+export const addComment = (comment) => ({
+   type: ADD_COMMENT,
+   comment
 });
 
 export const sortPosts = sortMethod => ({
@@ -91,4 +97,9 @@ export const fetchPostVote = (id, vote) => dispatch => (
 export const fetchCommentVote = (id, vote) => dispatch => (
     PostsAPIUtil.fetchCommentVote(id, vote)
         .then(() => dispatch(voteComment(id, vote)))
+);
+
+export const fetchComment = (comment) => dispatch => (
+    PostsAPIUtil.fetchComment(comment)
+        .then(() => dispatch(addComment(comment)))
 );

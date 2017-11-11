@@ -3,9 +3,12 @@ import PostBody from './PostBody'
 import NavBar from '../nav/NavBar'
 import PostsList from '../post/PostsList'
 import SortingPanel from '../root/SortingPanel'
+import CommentForm from './CommentForm';
 
 import {connect} from 'react-redux'
-import {fetchPost, fetchPostVote, fetchCommentVote, fetchComments, sortComments, VoteVariants, SortingMethods} from '../root/actions'
+import {
+    fetchPost, fetchPostVote, fetchCommentVote, fetchComments, sortComments, fetchComment, VoteVariants, SortingMethods
+} from '../root/actions'
 
 
 class Post extends Component {
@@ -55,7 +58,11 @@ class Post extends Component {
                     onSortingVote={this.props.sortCommentsByVoteScore}
                     onSortingTimestamp={this.props.sortCommentsByTimestamp}
                 />
-                <h3>Comments:</h3>
+                <h3>Comments ({this.props.post.commentCount})</h3>
+                <CommentForm
+                    post={this.props.post}
+                    onSumbitComment={this.props.fetchComment}
+                />
                 <PostsList
                     posts={this.orderComments()}
                     onVoteUp={this.props.commentVoteUp}
@@ -82,8 +89,9 @@ const mapDispatchToProps = (dispatch) => {
         postVoteDown: (id) => dispatch(fetchPostVote(id, VoteVariants.VOTE_DOWN)),
         commentVoteUp: (id) => dispatch(fetchCommentVote(id, VoteVariants.VOTE_UP)),
         commentVoteDown: (id) => dispatch(fetchCommentVote(id, VoteVariants.VOTE_DOWN)),
-        sortCommentsByVoteScore: (e) => dispatch(sortComments(SortingMethods.VOTE_SCORE)),
-        sortCommentsByTimestamp: (e) => dispatch(sortComments(SortingMethods.TIMESTAMP)),
+        sortCommentsByVoteScore: () => dispatch(sortComments(SortingMethods.VOTE_SCORE)),
+        sortCommentsByTimestamp: () => dispatch(sortComments(SortingMethods.TIMESTAMP)),
+        fetchComment: (comment) => dispatch(fetchComment(comment))
     }
 };
 

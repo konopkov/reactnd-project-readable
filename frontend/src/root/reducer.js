@@ -6,6 +6,7 @@ import {
     RECEIVE_COMMENTS,
     SORT_POSTS,
     SORT_COMMENTS,
+    ADD_COMMENT,
     SortingMethods,
     VOTE_POST,
     VoteVariants, VOTE_COMMENT
@@ -81,6 +82,10 @@ const comments = (state = InitialCommentsState, action) => {
         case SORT_COMMENTS:
 
             return {...state, sortingOrder: action.sortMethod};
+
+        case ADD_COMMENT:
+
+            return {...state, comments: [...state.comments, {...action.comment, voteScore: 0}]};
 
         case VOTE_COMMENT:
 

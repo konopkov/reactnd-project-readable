@@ -4,12 +4,20 @@ const ApiPaths = {
     API_CATEGORIES: 'categories',
     API_COMMENTS: 'comments'
 };
-
 const API_HEADERS_GET = { headers: { 'Authorization': 'app' }};
 const API_HEADERS_POST = { headers: { 'Authorization': 'app', 'Content-Type': 'application/json' }};
 const voteRequest = (vote) => {
     return {headers: API_HEADERS_POST.headers, method: 'POST', body: JSON.stringify({
         option: vote
+    })}
+};
+const newCommentRequest = (comment) => {
+    return {headers: API_HEADERS_POST.headers, method: 'POST', body: JSON.stringify({
+        id: comment.id,
+        timestamp: comment.timestamp,
+        body: comment.body,
+        author: comment.author,
+        parentId: comment.parentId
     })}
 };
 
@@ -28,3 +36,5 @@ export const fetchComments = (id) => fetch(`${SERVER_URL}/${ApiPaths.API_POSTS}/
 export const fetchPostVote = (id, vote) => fetch(`${SERVER_URL}/${ApiPaths.API_POSTS}/${id}`, voteRequest(vote));
 
 export const fetchCommentVote = (id, vote) => fetch(`${SERVER_URL}/${ApiPaths.API_COMMENTS}/${id}`, voteRequest(vote));
+
+export const fetchComment = (comment) => fetch(`${SERVER_URL}/${ApiPaths.API_COMMENTS}`, newCommentRequest(comment));

@@ -197,3 +197,9 @@ a {
     color: #444;
     margin-right: 25px;
 }
+
+.btn_comment_submit {
+    color: #444;
+    border: 1px solid #444;
+    box-shadow: none;
+}
