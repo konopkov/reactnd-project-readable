@@ -12,7 +12,6 @@ import {
 
 const InitialState = {
     posts: [],
-    post: {},
     sortingOrder: SortingMethods.VOTE_SCORE
 };
 
@@ -22,23 +21,27 @@ const posts = (state = InitialState, action) => {
         case RECEIVE_POSTS:
 
             return {
-                ...state, sortingOrder: SortingMethods.VOTE_SCORE, posts: action.posts
+                ...state, posts: action.posts
             };
 
         case RECEIVE_POST:
 
             return {
-                ...state, sortingOrder: SortingMethods.VOTE_SCORE, post: action.post
+                ...state, posts: [action.post]
             };
 
         case VOTE_POST:
 
             return {
                 ...state,
-                post: {
-                    ...state.post,
-                    voteScore: action.vote === VoteVariants.VOTE_UP ? state.post.voteScore + 1 : state.post.voteScore - 1
-                }
+                posts: state.posts.map((post) => {
+                   if (post.id === action.id) {
+                       const newVoteScore = action.vote === VoteVariants.VOTE_UP  ? post.voteScore + 1 : post.voteScore - 1;
+                       return {...post, voteScore: newVoteScore}
+                   } else {
+                       return {...post}
+                   }
+                })
             };
 
         case SORT_POSTS:

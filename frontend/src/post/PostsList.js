@@ -2,7 +2,7 @@ import React from 'react'
 import PostBody from './PostBody'
 
 
-const PostsList = ({posts}) => {
+const PostsList = ({posts, onVoteUp, onVoteDown}) => {
     if (posts.length === 0) {
         return <p>No posts</p>
     }
@@ -12,7 +12,12 @@ const PostsList = ({posts}) => {
             <ul className='content-list content-list_posts'>
                 {posts.map((post) => (
                     <li className='content-list__item content-list__item_post' key={post.id}>
-                        <PostBody key={post.id} post={post}/>
+                        <PostBody
+                            key={post.id}
+                            post={post}
+                            onVoteUp={onVoteUp}
+                            onVoteDown={onVoteDown}
+                        />
                     </li>
                 ))}
             </ul>

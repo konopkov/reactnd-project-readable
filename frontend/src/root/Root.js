@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import NavBar from '../nav/NavBar';
 import PostsList from '../post/PostsList';
-import {fetchPosts, sortPosts, SortingMethods} from "./actions";
+import {fetchPosts, sortPosts, fetchVote, SortingMethods, VoteVariants} from "./actions";
 
 
 class Root extends Component {
@@ -56,6 +56,8 @@ class Root extends Component {
                 </ul>
                 <PostsList
                     posts={this.orderPosts()}
+                    onVoteUp={this.props.voteUp}
+                    onVoteDown={this.props.voteDown}
                 />
             </div>
         )
@@ -74,7 +76,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchPosts: () => dispatch(fetchPosts()),
         sortPostsByVoteScore: (e) => dispatch(sortPosts(SortingMethods.VOTE_SCORE)),
-        sortPostsByTimestamp: (e) => dispatch(sortPosts(SortingMethods.TIMESTAMP))
+        sortPostsByTimestamp: (e) => dispatch(sortPosts(SortingMethods.TIMESTAMP)),
+        voteUp: (id) => dispatch(fetchVote(id, VoteVariants.VOTE_UP)),
+        voteDown: (id) => dispatch(fetchVote(id, VoteVariants.VOTE_DOWN))
     }
 };
 

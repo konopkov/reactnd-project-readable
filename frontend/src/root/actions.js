@@ -28,8 +28,9 @@ export const receivePost = post => ({
     post
 });
 
-export const votePost = vote => ({
+export const votePost = (id, vote) => ({
     type: VOTE_POST,
+    id,
     vote
 });
 
@@ -60,5 +61,5 @@ export const fetchCategories = () => dispatch => (
 
 export const fetchVote = (id, vote) => dispatch => (
     PostsAPIUtil.fetchVote(id, vote)
-        .then(() => dispatch(votePost(vote)))
+        .then(() => dispatch(votePost(id, vote)))
 );

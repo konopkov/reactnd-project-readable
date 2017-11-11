@@ -16,6 +16,10 @@ class Post extends Component {
     }
 
     render() {
+
+        if (!this.props.post) {
+            return <p>Not found</p>
+        }
         return (
             <div className='layout'>
                 <NavBar/>
@@ -32,7 +36,7 @@ class Post extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        post: state.posts.post
+        post: state.posts.posts[0]
     }
 };
 
