@@ -1,15 +1,21 @@
 import * as PostsAPIUtil from '../utils/api';
 
 
-export const RECEIVE_POSTS = "RECEIVE_POSTS";
-export const RECEIVE_POST = "RECEIVE_POST";
-export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES";
-export const SORT_POSTS = "SORT_POSTS";
+export const RECEIVE_POSTS = 'RECEIVE_POSTS';
+export const RECEIVE_POST = 'RECEIVE_POST';
+export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
+export const SORT_POSTS = 'SORT_POSTS';
 export const ADD_POST = 'ADD_POST';
+export const VOTE_POST = 'VOTE_POST';
 
 export const SortingMethods = {
     VOTE_SCORE: 'VOTE_SCORE',
     TIMESTAMP: 'TIMESTAMP'
+};
+
+export const VoteVariants = {
+    VOTE_UP: 'upVote',
+    VOTE_DOWN: 'downVote'
 };
 
 export const receivePosts = posts => ({
@@ -20,6 +26,11 @@ export const receivePosts = posts => ({
 export const receivePost = post => ({
     type: RECEIVE_POST,
     post
+});
+
+export const votePost = vote => ({
+    type: VOTE_POST,
+    vote
 });
 
 export const sortPosts = sortMethod => ({
@@ -45,4 +56,9 @@ export const fetchPost = (id) => dispatch => (
 export const fetchCategories = () => dispatch => (
     PostsAPIUtil.fetchCategories()
         .then(categories => dispatch(receiveCategories(categories)))
+);
+
+export const fetchVote = (id, vote) => dispatch => (
+    PostsAPIUtil.fetchVote(id, vote)
+        .then(() => dispatch(votePost(vote)))
 );

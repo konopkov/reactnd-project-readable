@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import PostBody from './PostBody'
-import NavBar from '../nav/NavBar';
+import NavBar from '../nav/NavBar'
 
 import {connect} from 'react-redux'
-import {fetchPost} from '../root/actions'
+import {fetchPost, fetchVote, VoteVariants} from '../root/actions'
 
 
 class Post extends Component {
@@ -19,7 +19,11 @@ class Post extends Component {
         return (
             <div className='layout'>
                 <NavBar/>
-                <PostBody post={this.props.post}>
+                <PostBody
+                    post={this.props.post}
+                    onVoteUp={this.props.voteUp}
+                    onVoteDown={this.props.voteDown}
+                >
                 </PostBody>
             </div>
         )
@@ -34,7 +38,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchPost: (id) => dispatch(fetchPost(id))
+        fetchPost: (id) => dispatch(fetchPost(id)),
+        voteUp: (id) => dispatch(fetchVote(id, VoteVariants.VOTE_UP)),
+        voteDown: (id) => dispatch(fetchVote(id, VoteVariants.VOTE_DOWN))
     }
 };
 

@@ -5,7 +5,7 @@ import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
 import FaCommentO from 'react-icons/lib/fa/comment-o'
 
 
-const PostBody = ({post}) => {
+const PostBody = ({post, onVoteUp, onVoteDown}) => {
 
     return (
         <article className='post'>
@@ -28,11 +28,11 @@ const PostBody = ({post}) => {
                 <ul className='post-stats'>
                     <li className='post-stats__item post-stats__item_voting-panel'>
                         <div className="voting-panel">
-                            <button type="button" className="btn voting-panel__button">
+                            <button onClick={() => {onVoteUp(post.id)}} type="button" className="btn voting-panel__button">
                                 <FaThumbsOUp size={15}/>
                             </button>
                             <span className='voting-panel__counter'>{post.voteScore}</span>
-                            <button type="button" className="btn voting-panel__button">
+                            <button onClick={() => {onVoteDown(post.id)}} type="button" className="btn voting-panel__button">
                                 <FaThumbsODown size={15}/>
                             </button>
                             <span className='post-stats__item post-stats__item_comments'>

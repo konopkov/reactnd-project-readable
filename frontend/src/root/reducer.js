@@ -1,5 +1,13 @@
 import {combineReducers} from 'redux'
-import {RECEIVE_POSTS, RECEIVE_POST, RECEIVE_CATEGORIES, SORT_POSTS, SortingMethods} from './actions'
+import {
+    RECEIVE_POSTS,
+    RECEIVE_POST,
+    RECEIVE_CATEGORIES,
+    SORT_POSTS,
+    SortingMethods,
+    VOTE_POST,
+    VoteVariants
+} from './actions'
 
 
 const InitialState = {
@@ -21,6 +29,16 @@ const posts = (state = InitialState, action) => {
 
             return {
                 ...state, sortingOrder: SortingMethods.VOTE_SCORE, post: action.post
+            };
+
+        case VOTE_POST:
+
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    voteScore: action.vote === VoteVariants.VOTE_UP ? state.post.voteScore + 1 : state.post.voteScore - 1
+                }
             };
 
         case SORT_POSTS:
