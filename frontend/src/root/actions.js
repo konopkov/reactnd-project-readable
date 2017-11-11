@@ -1,13 +1,11 @@
 import * as PostsAPIUtil from '../utils/api';
 
-
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const RECEIVE_POST = 'RECEIVE_POST';
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 export const SORT_POSTS = 'SORT_POSTS';
 export const SORT_COMMENTS = 'SORT_COMMENTS';
-export const ADD_POST = 'ADD_POST';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const VOTE_POST = 'VOTE_POST';
 export const VOTE_COMMENT = 'VOTE_COMMENT';
@@ -99,7 +97,12 @@ export const fetchCommentVote = (id, vote) => dispatch => (
         .then(() => dispatch(voteComment(id, vote)))
 );
 
-export const fetchComment = (comment) => dispatch => (
-    PostsAPIUtil.fetchComment(comment)
-        .then(() => dispatch(addComment(comment)))
+export const fetchNewComment = (comment) => dispatch => (
+    PostsAPIUtil.fetchNewComment(comment)
+        .then((comment) => dispatch(addComment(comment)))
+);
+
+export const fetchNewPost = (post) => dispatch => (
+    PostsAPIUtil.fetchNewPost(post)
+        .then((post) => dispatch(receivePost(post)))
 );

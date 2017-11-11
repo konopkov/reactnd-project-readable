@@ -1,13 +1,23 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+
 import PostBody from './PostBody'
+import PostForm from './PostForm'
 import NavBar from '../nav/NavBar'
 import PostsList from '../post/PostsList'
 import SortingPanel from '../root/SortingPanel'
 import CommentForm from './CommentForm';
 
-import {connect} from 'react-redux'
 import {
-    fetchPost, fetchPostVote, fetchCommentVote, fetchComments, sortComments, fetchComment, VoteVariants, SortingMethods
+    fetchPost,
+    fetchPostVote,
+    fetchCommentVote,
+    fetchComments,
+    sortComments,
+    fetchNewComment,
+    fetchNewPost,
+    VoteVariants,
+    SortingMethods
 } from '../root/actions'
 
 
@@ -17,8 +27,10 @@ class Post extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchPost(this.props.id);
-        this.props.fetchComments(this.props.id);
+        if (this.props.id !== 'new') {
+            this.props.fetchPost(this.props.id);
+            this.props.fetchComments(this.props.id);
+        }
     }
 
     orderComments() {
@@ -41,9 +53,26 @@ class Post extends Component {
 
     render() {
 
-        if (!this.props.post) {
-            return <p>Not found</p>
+        if (this.props.id === 'new' && (!this.props.post || Object.keys(this.props.post).length === 0)) {
+
+            return (
+                <div className='layout'>
+                    <NavBar/>
+                    <PostForm
+                        onSumbitPost={this.props.fetchNewPost}
+                    />
+                </div>
+            )
+        } else if (!this.props.post || Object.keys(this.props.post).length === 0) {
+
+            return (
+                <div className='layout'>
+                    <NavBar/>
+                    Post not found
+                </div>
+            )
         }
+
         return (
             <div className='layout'>
                 <NavBar/>
@@ -61,7 +90,7 @@ class Post extends Component {
                 <h3>Comments ({this.props.post.commentCount})</h3>
                 <CommentForm
                     post={this.props.post}
-                    onSumbitComment={this.props.fetchComment}
+                    onSumbitComment={this.props.fetchNewComment}
                 />
                 <PostsList
                     posts={this.orderComments()}
@@ -91,7 +120,8 @@ const mapDispatchToProps = (dispatch) => {
         commentVoteDown: (id) => dispatch(fetchCommentVote(id, VoteVariants.VOTE_DOWN)),
         sortCommentsByVoteScore: () => dispatch(sortComments(SortingMethods.VOTE_SCORE)),
         sortCommentsByTimestamp: () => dispatch(sortComments(SortingMethods.TIMESTAMP)),
-        fetchComment: (comment) => dispatch(fetchComment(comment))
+        fetchNewComment: (comment) => dispatch(fetchNewComment(comment)),
+        fetchNewPost: (post) => dispatch(fetchNewPost(post))
     }
 };
 

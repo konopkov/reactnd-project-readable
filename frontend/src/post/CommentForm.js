@@ -24,7 +24,6 @@ class CommentForm extends Component {
     }
 
     onSubmit(event) {
-        // alert('A comment was submitted: ' + this.state.inputValue + ' ' + this.state.textAreaValue);
         event.preventDefault();
         const comment = {
             id: uuidv4(),
@@ -44,13 +43,13 @@ class CommentForm extends Component {
                         <label htmlFor='name'>Name:</label>
                     </li>
                     <li>
-                        <input type='text' id='name' value={this.state.value} onChange={this.onInputChange}/>
+                        <input type='text' id='name' value={this.state.inputValue} onChange={this.onInputChange}/>
                     </li>
                     <li>
                         <label htmlFor='comment'>Comment:</label>
                     </li>
                     <li>
-                        <textarea rows='10' cols='50' id='comment' placeholder='Say something nice...' value={this.state.value}
+                        <textarea rows='10' cols='50' id='comment' placeholder='Say something nice...' value={this.state.textAreaValue}
                                   onChange={this.onTextAreaChange}/>
                     </li>
                     <li>

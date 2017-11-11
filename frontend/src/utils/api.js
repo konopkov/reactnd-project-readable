@@ -20,12 +20,29 @@ const newCommentRequest = (comment) => {
         parentId: comment.parentId
     })}
 };
+const newPostRequest = (post) => {
+    return {headers: API_HEADERS_POST.headers, method: 'POST', body: JSON.stringify({
+        id: post.id,
+        timestamp: post.timestamp,
+        title: post.title,
+        category: post.category,
+        body: post.body,
+        author: post.author,
+    })}
+};
 
 export const fetchPosts = () => fetch(`${SERVER_URL}/${ApiPaths.API_POSTS}`, API_HEADERS_GET)
     .then((res) => res.json());
 
 export const fetchPost = (id) => fetch(`${SERVER_URL}/${ApiPaths.API_POSTS}/${id}`, API_HEADERS_GET)
-    .then((res) => res.json());
+    .then((res) => res.json())
+    .then((post) => {
+        if (!post.error) {
+            return post
+        } else {
+            return {}
+        }
+    });
 
 export const fetchCategories = () => fetch(`${SERVER_URL}/${ApiPaths.API_CATEGORIES}`, API_HEADERS_GET)
     .then((res) => res.json());
@@ -37,4 +54,8 @@ export const fetchPostVote = (id, vote) => fetch(`${SERVER_URL}/${ApiPaths.API_P
 
 export const fetchCommentVote = (id, vote) => fetch(`${SERVER_URL}/${ApiPaths.API_COMMENTS}/${id}`, voteRequest(vote));
 
-export const fetchComment = (comment) => fetch(`${SERVER_URL}/${ApiPaths.API_COMMENTS}`, newCommentRequest(comment));
+export const fetchNewComment = (comment) => fetch(`${SERVER_URL}/${ApiPaths.API_COMMENTS}`, newCommentRequest(comment))
+    .then((res) => res.json());
+
+export const fetchNewPost = (post) => fetch(`${SERVER_URL}/${ApiPaths.API_POSTS}`, newPostRequest(post))
+    .then((res) => res.json());
