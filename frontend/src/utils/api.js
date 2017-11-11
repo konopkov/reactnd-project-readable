@@ -22,4 +22,9 @@ export const fetchPost = (id) => fetch(`${SERVER_URL}/${ApiPaths.API_POSTS}/${id
 export const fetchCategories = () => fetch(`${SERVER_URL}/${ApiPaths.API_CATEGORIES}`, API_HEADERS_GET)
     .then((res) => res.json());
 
-export const fetchVote = (id, vote) => fetch(`${SERVER_URL}/${ApiPaths.API_POSTS}/${id}`, voteRequest(vote));
+export const fetchComments = (id) => fetch(`${SERVER_URL}/${ApiPaths.API_POSTS}/${id}/comments`, API_HEADERS_GET)
+    .then((res) => res.json());
+
+export const fetchPostVote = (id, vote) => fetch(`${SERVER_URL}/${ApiPaths.API_POSTS}/${id}`, voteRequest(vote));
+
+export const fetchCommentVote = (id, vote) => fetch(`${SERVER_URL}/${ApiPaths.API_COMMENTS}/${id}`, voteRequest(vote));

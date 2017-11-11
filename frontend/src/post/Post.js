@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
 import PostBody from './PostBody'
 import NavBar from '../nav/NavBar'
+import PostsList from '../post/PostsList'
+import SortingPanel from '../root/SortingPanel'
 
 import {connect} from 'react-redux'
-import {fetchPost, fetchVote, VoteVariants} from '../root/actions'
+import {fetchPost, fetchPostVote, fetchCommentVote, fetchComments, sortComments, VoteVariants, SortingMethods} from '../root/actions'
 
 
 class Post extends Component {
@@ -13,6 +15,25 @@ class Post extends Component {
 
     componentDidMount() {
         this.props.fetchPost(this.props.id);
+        this.props.fetchComments(this.props.id);
+    }
+
+    orderComments() {
+
+        const comments = this.props.comments;
+
+        switch (this.props.sortingOrder) {
+            case SortingMethods.VOTE_SCORE:
+                return comments.sort((comments1, comments2) => {
+                    return comments2.voteScore - comments1.voteScore
+                });
+            case SortingMethods.TIMESTAMP:
+                return comments.sort((comments1, comments2) => {
+                    return comments2.timestamp - comments1.timestamp
+                });
+            default:
+                return comments
+        }
     }
 
     render() {
@@ -25,10 +46,21 @@ class Post extends Component {
                 <NavBar/>
                 <PostBody
                     post={this.props.post}
-                    onVoteUp={this.props.voteUp}
-                    onVoteDown={this.props.voteDown}
+                    onVoteUp={this.props.postVoteUp}
+                    onVoteDown={this.props.postVoteDown}
                 >
                 </PostBody>
+                <SortingPanel
+                    sortingOrder={this.props.sortingOrder}
+                    onSortingVote={this.props.sortCommentsByVoteScore}
+                    onSortingTimestamp={this.props.sortCommentsByTimestamp}
+                />
+                <h3>Comments:</h3>
+                <PostsList
+                    posts={this.orderComments()}
+                    onVoteUp={this.props.commentVoteUp}
+                    onVoteDown={this.props.commentVoteDown}
+                />
             </div>
         )
     }
@@ -36,15 +68,22 @@ class Post extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        post: state.posts.posts[0]
+        post: state.posts.posts[0],
+        comments: state.comments.comments,
+        sortingOrder: state.comments.sortingOrder
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchPost: (id) => dispatch(fetchPost(id)),
-        voteUp: (id) => dispatch(fetchVote(id, VoteVariants.VOTE_UP)),
-        voteDown: (id) => dispatch(fetchVote(id, VoteVariants.VOTE_DOWN))
+        fetchComments: (id) => dispatch(fetchComments(id)),
+        postVoteUp: (id) => dispatch(fetchPostVote(id, VoteVariants.VOTE_UP)),
+        postVoteDown: (id) => dispatch(fetchPostVote(id, VoteVariants.VOTE_DOWN)),
+        commentVoteUp: (id) => dispatch(fetchCommentVote(id, VoteVariants.VOTE_UP)),
+        commentVoteDown: (id) => dispatch(fetchCommentVote(id, VoteVariants.VOTE_DOWN)),
+        sortCommentsByVoteScore: (e) => dispatch(sortComments(SortingMethods.VOTE_SCORE)),
+        sortCommentsByTimestamp: (e) => dispatch(sortComments(SortingMethods.TIMESTAMP)),
     }
 };
 

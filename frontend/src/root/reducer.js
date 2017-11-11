@@ -3,19 +3,21 @@ import {
     RECEIVE_POSTS,
     RECEIVE_POST,
     RECEIVE_CATEGORIES,
+    RECEIVE_COMMENTS,
     SORT_POSTS,
+    SORT_COMMENTS,
     SortingMethods,
     VOTE_POST,
-    VoteVariants
+    VoteVariants, VOTE_COMMENT
 } from './actions'
 
 
-const InitialState = {
+const InitialPostsState = {
     posts: [],
     sortingOrder: SortingMethods.VOTE_SCORE
 };
 
-const posts = (state = InitialState, action) => {
+const posts = (state = InitialPostsState, action) => {
 
     switch (action.type) {
         case RECEIVE_POSTS:
@@ -35,12 +37,12 @@ const posts = (state = InitialState, action) => {
             return {
                 ...state,
                 posts: state.posts.map((post) => {
-                   if (post.id === action.id) {
-                       const newVoteScore = action.vote === VoteVariants.VOTE_UP  ? post.voteScore + 1 : post.voteScore - 1;
-                       return {...post, voteScore: newVoteScore}
-                   } else {
-                       return {...post}
-                   }
+                    if (post.id === action.id) {
+                        const newVoteScore = action.vote === VoteVariants.VOTE_UP ? post.voteScore + 1 : post.voteScore - 1;
+                        return {...post, voteScore: newVoteScore}
+                    } else {
+                        return {...post}
+                    }
                 })
             };
 
@@ -64,8 +66,44 @@ const categories = (state = {categories: []}, action) => {
     }
 };
 
+const InitialCommentsState = {
+    comments: [],
+    sortingOrder: SortingMethods.VOTE_SCORE
+};
+
+const comments = (state = InitialCommentsState, action) => {
+
+    switch (action.type) {
+        case RECEIVE_COMMENTS:
+
+            return {...state, comments: action.comments};
+
+        case SORT_COMMENTS:
+
+            return {...state, sortingOrder: action.sortMethod};
+
+        case VOTE_COMMENT:
+
+            return {
+                ...state,
+                comments: state.comments.map((comment) => {
+                    if (comment.id === action.id) {
+                        const newVoteScore = action.vote === VoteVariants.VOTE_UP ? comment.voteScore + 1 : comment.voteScore - 1;
+                        return {...comment, voteScore: newVoteScore}
+                    } else {
+                        return {...comment}
+                    }
+                })
+            };
+
+        default:
+            return state
+    }
+};
+
 export default combineReducers({
         posts,
-        categories
+        categories,
+        comments
     }
 );

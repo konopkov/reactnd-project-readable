@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import NavBar from '../nav/NavBar'
 import PostsList from '../post/PostsList'
 import SortingPanel from './SortingPanel'
-import {fetchPosts, sortPosts, fetchVote, SortingMethods, VoteVariants} from "./actions"
+import {fetchPosts, sortPosts, fetchPostVote, SortingMethods, VoteVariants} from "./actions"
 
 
 class Root extends Component {
@@ -46,14 +46,14 @@ class Root extends Component {
             <div className='layout'>
                 <NavBar/>
                 <SortingPanel
-                    sortingOrder = {this.props.sortingOrder}
+                    sortingOrder={this.props.sortingOrder}
                     onSortingVote={this.props.sortPostsByVoteScore}
                     onSortingTimestamp={this.props.sortPostsByTimestamp}
                 />
                 <PostsList
                     posts={this.orderPosts()}
-                    onVoteUp={this.props.voteUp}
-                    onVoteDown={this.props.voteDown}
+                    onVoteUp={this.props.postVoteUp}
+                    onVoteDown={this.props.postVoteDown}
                 />
             </div>
         )
@@ -73,8 +73,8 @@ const mapDispatchToProps = (dispatch) => {
         fetchPosts: () => dispatch(fetchPosts()),
         sortPostsByVoteScore: (e) => dispatch(sortPosts(SortingMethods.VOTE_SCORE)),
         sortPostsByTimestamp: (e) => dispatch(sortPosts(SortingMethods.TIMESTAMP)),
-        voteUp: (id) => dispatch(fetchVote(id, VoteVariants.VOTE_UP)),
-        voteDown: (id) => dispatch(fetchVote(id, VoteVariants.VOTE_DOWN))
+        postVoteUp: (id) => dispatch(fetchPostVote(id, VoteVariants.VOTE_UP)),
+        postVoteDown: (id) => dispatch(fetchPostVote(id, VoteVariants.VOTE_DOWN))
     }
 };
 
