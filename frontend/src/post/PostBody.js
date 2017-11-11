@@ -11,7 +11,9 @@ const PostBody = ({post, onVoteUp, onVoteDown}) => {
         <article className='post'>
             <header className='post__meta'>
                 <div className='user-info__nickname'>{post.author}</div>
-                <div className='post__time'>{new Date(post.timestamp).toDateString()}</div>
+                <div className='post__time'>
+                    {`${new Date(post.timestamp).toLocaleDateString('en-US')} ${new Date(post.timestamp).toLocaleTimeString('en-US')}`}
+                    </div>
             </header>
             <h3 className='post__title'>
                 <Link className='post__title_link' to={`/posts/${post.id}`}>{post.title}</Link>
