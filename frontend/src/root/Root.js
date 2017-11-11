@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import NavBar from '../nav/NavBar';
-import PostsList from '../post/PostsList';
-import {fetchPosts, sortPosts, fetchVote, SortingMethods, VoteVariants} from "./actions";
+import NavBar from '../nav/NavBar'
+import PostsList from '../post/PostsList'
+import SortingPanel from './SortingPanel'
+import {fetchPosts, sortPosts, fetchVote, SortingMethods, VoteVariants} from "./actions"
 
 
 class Root extends Component {
@@ -44,16 +45,11 @@ class Root extends Component {
         return (
             <div className='layout'>
                 <NavBar/>
-                <ul className='sorting-panel'>
-                    <button className={`btn sorting-panel__button ${this.props.sortingOrder === SortingMethods.VOTE_SCORE ? 'sorting-panel__button_active' : ''} `}
-                            onClick={this.props.sortPostsByVoteScore}>
-                        By Votes
-                    </button>
-                    <button className={`btn sorting-panel__button ${this.props.sortingOrder === SortingMethods.TIMESTAMP ? 'sorting-panel__button_active' : ''} `}
-                            onClick={this.props.sortPostsByTimestamp}>
-                        By Time
-                    </button>
-                </ul>
+                <SortingPanel
+                    sortingOrder = {this.props.sortingOrder}
+                    onSortingVote={this.props.sortPostsByVoteScore}
+                    onSortingTimestamp={this.props.sortPostsByTimestamp}
+                />
                 <PostsList
                     posts={this.orderPosts()}
                     onVoteUp={this.props.voteUp}
