@@ -1,8 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
-import FaThumbsODown from 'react-icons/lib/fa/thumbs-o-down'
-import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
-import FaCommentO from 'react-icons/lib/fa/comment-o'
+
+import PostFooter from './PostFooter'
 
 
 const PostBody = ({post, onVoteUp, onVoteDown}) => {
@@ -27,24 +26,11 @@ const PostBody = ({post, onVoteUp, onVoteDown}) => {
                 {post.body}
             </div>
             <footer className='post__footer'>
-                <ul className='post-stats'>
-                    <li className='post-stats__item post-stats__item_voting-panel'>
-                        <div className="voting-panel">
-                            <button onClick={() => {onVoteUp(post.id)}} type="button" className="btn voting-panel__button">
-                                <FaThumbsOUp size={15}/>
-                            </button>
-                            <span className='voting-panel__counter'>{post.voteScore}</span>
-                            <button onClick={() => {onVoteDown(post.id)}} type="button" className="btn voting-panel__button">
-                                <FaThumbsODown size={15}/>
-                            </button>
-                            <span className='post-stats__item post-stats__item_comments'>
-                                                <FaCommentO sixe={15}>
-                                                </FaCommentO>
-                                            </span>
-                            <span className='post-stats__comments-count'>{post.commentCount}</span>
-                        </div>
-                    </li>
-                </ul>
+                <PostFooter
+                    post={post}
+                    onVoteUp={onVoteUp}
+                    onVoteDown={onVoteDown}
+                />
             </footer>
         </article>
     )
