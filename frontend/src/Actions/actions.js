@@ -7,6 +7,7 @@ export const UPDATE_POST = 'UPDATE_POST';
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT';
+export const CLEAR_COMMENTS = 'CLEAR_COMMENTS';
 export const SORT_POSTS = 'SORT_POSTS';
 export const SORT_COMMENTS = 'SORT_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
@@ -52,6 +53,10 @@ export const receiveComments = comments => ({
 export const receiveComment = comment => ({
     type: RECEIVE_COMMENT,
     comment
+});
+
+export const clearComments = () => ({
+    type: CLEAR_COMMENTS
 });
 
 export const votePost = (id, vote) => ({

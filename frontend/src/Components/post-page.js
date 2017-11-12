@@ -23,6 +23,7 @@ import {
     fetchUpdatePost,
     fetchUpdateComment,
     clearPosts,
+    clearComments,
     VoteVariants,
     SortingMethods
 } from '../Actions/actions'
@@ -39,7 +40,8 @@ class PostPage extends Component {
             this.props.fetchPost(this.props.id);
             this.props.fetchComments(this.props.id);
         } else {
-            this.props.clearPosts()
+            this.props.clearPosts();
+            this.props.clearComments();
         }
     }
 
@@ -135,6 +137,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchPost: (id) => dispatch(fetchPost(id)),
         clearPosts: () => dispatch(clearPosts()),
         fetchComments: (id) => dispatch(fetchComments(id)),
+        clearComments: () => dispatch(clearComments()),
         postVoteUp: (id) => dispatch(fetchPostVote(id, VoteVariants.VOTE_UP)),
         postVoteDown: (id) => dispatch(fetchPostVote(id, VoteVariants.VOTE_DOWN)),
         commentVoteUp: (id) => dispatch(fetchCommentVote(id, VoteVariants.VOTE_UP)),

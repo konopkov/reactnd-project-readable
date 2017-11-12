@@ -9,6 +9,7 @@ import {
     RECEIVE_COMMENT,
     SORT_POSTS,
     SORT_COMMENTS,
+    CLEAR_COMMENTS,
     ADD_COMMENT,
     DELETE_POST,
     DELETE_COMMENT,
@@ -121,6 +122,12 @@ const comments = (state = InitialCommentsState, action) => {
         case SORT_COMMENTS:
 
             return {...state, sortingOrder: action.sortMethod};
+
+        case CLEAR_COMMENTS:
+
+            return {
+                ...state, comments: []
+            };
 
         case ADD_COMMENT:
 
