@@ -77,11 +77,6 @@ export const voteComment = (id, vote) => ({
     vote
 });
 
-export const addComment = (comment) => ({
-    type: ADD_COMMENT,
-    comment
-});
-
 export const sortPosts = sortMethod => ({
     type: SORT_POSTS,
     sortMethod
