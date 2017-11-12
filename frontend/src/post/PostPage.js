@@ -3,10 +3,12 @@ import {connect} from 'react-redux'
 
 import Post from './Item'
 import PostForm from './PostForm'
+import Editor from './Editor'
 import NavBar from '../nav/NavBar'
 import CommentsList from './ItemsList'
 import CommentsSortingPanel from '../root/SortingPanel'
 import CommentForm from './CommentForm';
+
 
 import {
     fetchPost,
@@ -18,12 +20,18 @@ import {
     fetchNewPost,
     fetchDeleteComment,
     fetchDeletePost,
+    fetchUpdatePost,
+    fetchUpdateComment,
     VoteVariants,
     SortingMethods
 } from '../root/actions'
 
 
 class PostPage extends Component {
+    state = {
+        editorOpen: false
+    };
+
     constructor(props) {
         super(props);
     }
@@ -34,6 +42,17 @@ class PostPage extends Component {
             this.props.fetchComments(this.props.id);
         }
     }
+
+    openEditor = () => {
+        this.setState(() => ({
+            editorOpen: true,
+        }))
+    };
+    closeEditor = () => {
+        this.setState(() => ({
+            editorOpen: false,
+        }))
+    };
 
     orderComments() {
 
@@ -55,17 +74,25 @@ class PostPage extends Component {
 
     render() {
 
-        if (this.props.id === 'new' && (!this.props.post || Object.keys(this.props.post).length === 0)) {
+        const {editorOpen} = this.state;
+        const {
+            id, post, sortingOrder,
+            postVoteUp, postVoteDown, postEdit, postDelete, fetchNewPost,
+            sortCommentsByVoteScore, sortCommentsByTimestamp,
+            commentVoteUp, commentVoteDown, commentEdit, commentDelete, fetchNewComment
+        } = this.props;
+
+        if (id === 'new' && (!post || Object.keys(post).length === 0)) {
 
             return (
                 <div className='layout'>
                     <NavBar/>
                     <PostForm
-                        onSumbitPost={this.props.fetchNewPost}
+                        onSumbitPost={fetchNewPost}
                     />
                 </div>
             )
-        } else if (!this.props.post || Object.keys(this.props.post).length === 0) {
+        } else if (!post || Object.keys(post).length === 0) {
 
             return (
                 <div className='layout'>
@@ -78,30 +105,36 @@ class PostPage extends Component {
         return (
             <div className='layout'>
                 <NavBar/>
-                <Post
-                    item={this.props.post}
-                    onVoteUp={this.props.postVoteUp}
-                    onVoteDown={this.props.postVoteDown}
-                    onEdit={this.props.postEdit}
-                    onDelete={this.props.postDelete}
-                >
-                </Post>
-                <h3>Comments ({this.props.post.commentCount})</h3>
+                {!editorOpen && <Post
+                    item={post}
+                    onVoteUp={postVoteUp}
+                    onVoteDown={postVoteDown}
+                    onEdit={this.openEditor}
+                    onDelete={postDelete}
+                />}
+
+                {editorOpen && <Editor
+                    item={post}
+                    onSumbitUpdate={postEdit}
+                    onCancelUpdate={this.closeEditor}
+                />}
+
+                <h3>Comments ({post.commentCount})</h3>
                 <CommentForm
-                    parentId={this.props.post.id}
-                    onSumbitComment={this.props.fetchNewComment}
+                    parentId={post.id}
+                    onSumbitComment={fetchNewComment}
                 />
                 <CommentsSortingPanel
-                    sortingOrder={this.props.sortingOrder}
-                    onSortingVote={this.props.sortCommentsByVoteScore}
-                    onSortingTimestamp={this.props.sortCommentsByTimestamp}
+                    sortingOrder={sortingOrder}
+                    onSortingVote={sortCommentsByVoteScore}
+                    onSortingTimestamp={sortCommentsByTimestamp}
                 />
                 <CommentsList
                     items={this.orderComments()}
-                    onVoteUp={this.props.commentVoteUp}
-                    onVoteDown={this.props.commentVoteDown}
-                    onEdit={this.props.commentEdit}
-                    onDelete={this.props.commentDelete}
+                    onVoteUp={commentVoteUp}
+                    onVoteDown={commentVoteDown}
+                    onEdit={commentEdit}
+                    onDelete={commentDelete}
                 />
             </div>
         )
@@ -128,7 +161,7 @@ const mapDispatchToProps = (dispatch) => {
         sortCommentsByTimestamp: () => dispatch(sortComments(SortingMethods.TIMESTAMP)),
         fetchNewComment: (comment) => dispatch(fetchNewComment(comment)),
         fetchNewPost: (post) => dispatch(fetchNewPost(post)),
-        postEdit: (id) => alert(id),
+        postEdit: (post) => dispatch(fetchUpdatePost(post)),
         postDelete: (id) => dispatch(fetchDeletePost(id)),
         commentEdit: (id) => alert(id),
         commentDelete: (id) => dispatch(fetchDeleteComment(id))
