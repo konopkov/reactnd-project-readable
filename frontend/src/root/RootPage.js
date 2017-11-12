@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import NavBar from '../nav/NavBar'
 import PostsList from '../post/ItemsList'
 import PostsSortingPanel from './SortingPanel'
-import {fetchPosts, sortPosts, fetchPostVote, fetchDeletePost, SortingMethods, VoteVariants} from "./actions"
+import {fetchPosts, sortPosts, fetchPostVote, fetchDeletePost, fetchUpdatePost, SortingMethods, VoteVariants} from "./actions"
 
 
 class Root extends Component {
@@ -77,7 +77,7 @@ const mapDispatchToProps = (dispatch) => {
         sortPostsByTimestamp: (e) => dispatch(sortPosts(SortingMethods.TIMESTAMP)),
         postVoteUp: (id) => dispatch(fetchPostVote(id, VoteVariants.VOTE_UP)),
         postVoteDown: (id) => dispatch(fetchPostVote(id, VoteVariants.VOTE_DOWN)),
-        postEdit: (id) => alert(id),
+        postEdit: (post) => dispatch(fetchUpdatePost(post)),
         postDelete: (id) => dispatch(fetchDeletePost(id)),
     }
 };

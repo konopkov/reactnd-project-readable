@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 
 import Post from './Item'
 import PostForm from './PostForm'
-import Editor from './Editor'
 import NavBar from '../nav/NavBar'
 import CommentsList from './ItemsList'
 import CommentsSortingPanel from '../root/SortingPanel'
@@ -28,9 +27,6 @@ import {
 
 
 class PostPage extends Component {
-    state = {
-        editorOpen: false
-    };
 
     constructor(props) {
         super(props);
@@ -42,17 +38,6 @@ class PostPage extends Component {
             this.props.fetchComments(this.props.id);
         }
     }
-
-    openEditor = () => {
-        this.setState(() => ({
-            editorOpen: true,
-        }))
-    };
-    closeEditor = () => {
-        this.setState(() => ({
-            editorOpen: false,
-        }))
-    };
 
     orderComments() {
 
@@ -74,7 +59,6 @@ class PostPage extends Component {
 
     render() {
 
-        const {editorOpen} = this.state;
         const {
             id, post, sortingOrder,
             postVoteUp, postVoteDown, postEdit, postDelete, fetchNewPost,
@@ -105,20 +89,13 @@ class PostPage extends Component {
         return (
             <div className='layout'>
                 <NavBar/>
-                {!editorOpen && <Post
+                <Post
                     item={post}
                     onVoteUp={postVoteUp}
                     onVoteDown={postVoteDown}
-                    onEdit={this.openEditor}
+                    onEdit={postEdit}
                     onDelete={postDelete}
-                />}
-
-                {editorOpen && <Editor
-                    item={post}
-                    onSumbitUpdate={postEdit}
-                    onCancelUpdate={this.closeEditor}
-                />}
-
+                />
                 <h3>Comments ({post.commentCount})</h3>
                 <CommentForm
                     parentId={post.id}
@@ -163,7 +140,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchNewPost: (post) => dispatch(fetchNewPost(post)),
         postEdit: (post) => dispatch(fetchUpdatePost(post)),
         postDelete: (id) => dispatch(fetchDeletePost(id)),
-        commentEdit: (id) => alert(id),
+        commentEdit: (comment) => dispatch(fetchUpdateComment(comment)),
         commentDelete: (id) => dispatch(fetchDeleteComment(id))
     }
 };

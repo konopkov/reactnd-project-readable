@@ -2,6 +2,7 @@ import * as PostsAPIUtil from '../utils/api';
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const RECEIVE_POST = 'RECEIVE_POST';
+export const UPDATE_POST = 'UPDATE_POST';
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT';
@@ -30,6 +31,11 @@ export const receivePosts = posts => ({
 
 export const receivePost = post => ({
     type: RECEIVE_POST,
+    post
+});
+
+export const updatePost = post => ({
+    type: UPDATE_POST,
     post
 });
 
@@ -137,7 +143,7 @@ export const fetchDeleteComment = (id) => dispatch => (
 
 export const fetchUpdatePost = (post) => dispatch => (
     PostsAPIUtil.fetchUpdatePost(post)
-        .then((post) => dispatch(receivePost(post)))
+        .then((post) => dispatch(updatePost(post)))
 );
 
 export const fetchUpdateComment = (comment) => dispatch => (

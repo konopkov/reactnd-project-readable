@@ -2,6 +2,7 @@ import {combineReducers} from 'redux'
 import {
     RECEIVE_POSTS,
     RECEIVE_POST,
+    UPDATE_POST,
     RECEIVE_CATEGORIES,
     RECEIVE_COMMENTS,
     RECEIVE_COMMENT,
@@ -35,6 +36,18 @@ const posts = (state = InitialPostsState, action) => {
             return {
                 ...state, posts: [action.post]
             };
+
+        case UPDATE_POST:
+
+            const posts = [];
+            for (const post of state.posts) {
+                post.id === action.post.id
+                    ? posts.push(action.post)
+                    : posts.push(post)
+
+            }
+
+            return {...state, posts: posts};
 
         case VOTE_POST:
 
