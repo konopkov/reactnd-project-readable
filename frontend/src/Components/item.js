@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom'
 
 import ItemFooter from './item-footer'
 import ItemHeader from './item-header'
 import Editor from './editor'
 
 import {ApiPaths} from '../Utils/api'
+
 
 class Item extends Component {
     state = {

@@ -4,7 +4,15 @@ import {connect} from 'react-redux'
 import NavBar from './nav-bar'
 import PostsList from './items-list'
 import PostsSortingPanel from './sorting-panel'
-import {fetchPosts, sortPosts, fetchPostVote, fetchDeletePost, fetchUpdatePost, SortingMethods, VoteVariants} from "../Actions/actions"
+import {
+    fetchPosts,
+    sortPosts,
+    fetchPostVote,
+    fetchDeletePost,
+    fetchUpdatePost,
+    SortingMethods,
+    VoteVariants
+} from "../Actions/actions"
 
 
 class Root extends Component {

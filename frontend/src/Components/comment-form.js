@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {uuidv4} from '../Utils/uuid'
 
+
 class CommentForm extends Component {
     constructor(props) {
         super(props);
@@ -53,7 +54,8 @@ class CommentForm extends Component {
                         <label htmlFor='comment'>Comment:</label>
                     </li>
                     <li>
-                        <textarea rows='10' cols='50' id='comment' placeholder='Say something nice...' value={this.state.textAreaValue}
+                        <textarea rows='10' cols='50' id='comment' placeholder='Say something nice...'
+                                  value={this.state.textAreaValue}
                                   onChange={this.onTextAreaChange}/>
                     </li>
                     <li>

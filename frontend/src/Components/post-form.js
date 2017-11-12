@@ -69,13 +69,15 @@ class PostForm extends Component {
                         <label htmlFor='category'>Category:</label>
                     </li>
                     <li>
-                        <input type='text' id='category' value={this.state.categoryValue} onChange={this.onCategoryChange}/>
+                        <input type='text' id='category' value={this.state.categoryValue}
+                               onChange={this.onCategoryChange}/>
                     </li>
                     <li>
                         <label htmlFor='post'>Post:</label>
                     </li>
                     <li>
-                        <textarea rows='10' cols='50' id='post' placeholder='Your new post. Here.' value={this.state.textAreaValue}
+                        <textarea rows='10' cols='50' id='post' placeholder='Your new post. Here.'
+                                  value={this.state.textAreaValue}
                                   onChange={this.onTextAreaChange}/>
                     </li>
                     <li>

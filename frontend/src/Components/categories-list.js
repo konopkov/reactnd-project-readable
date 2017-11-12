@@ -1,10 +1,10 @@
 import React from 'react'
-import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom'
 
 import {ApiPaths} from '../Utils/api'
 
 
-const CategoriesList = ({ categories }) => {
+const CategoriesList = ({categories}) => {
     if (categories.length === 0) {
         return <p>No categories</p>
     }
@@ -15,7 +15,8 @@ const CategoriesList = ({ categories }) => {
                 {categories.map((category) => (
                     <li key={category.name}>
                         <h3 className='category_title'>
-                            <Link className='category_link' to={`/${ApiPaths.PAGE_CATEGORY}/${category.path}`}>{category.name}</Link>
+                            <Link className='category_link'
+                                  to={`/${ApiPaths.PAGE_CATEGORY}/${category.path}`}>{category.name}</Link>
                         </h3>
                     </li>
                 ))}

@@ -6,7 +6,7 @@ import PostForm from './post-form'
 import NavBar from './nav-bar'
 import CommentsList from './items-list'
 import CommentsSortingPanel from './sorting-panel'
-import CommentForm from './comment-form';
+import CommentForm from './comment-form'
 
 import {ApiPaths} from '../Utils/api'
 

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 
+
 class Editor extends Component {
     constructor(props) {
         super(props);
@@ -49,14 +50,16 @@ class Editor extends Component {
                         <label htmlFor='post'>Post:</label>
                     </li>
                     <li>
-                        <textarea rows='10' cols='50' id='post' placeholder='Your new post. Here.' value={this.state.textAreaValue}
+                        <textarea rows='10' cols='50' id='post' placeholder='Your new post. Here.'
+                                  value={this.state.textAreaValue}
                                   onChange={this.onTextAreaChange}/>
                     </li>
                     <li>
                         <input className='btn btn_x-large btn_comment_submit' type='submit' value='Submit'/>
                     </li>
                     <li>
-                        <input onClick={this.onCancelUpdate} className='btn btn_x-large btn_comment_submit' type='reset' value='Cancel'/>
+                        <input onClick={this.onCancelUpdate} className='btn btn_x-large btn_comment_submit' type='reset'
+                               value='Cancel'/>
                     </li>
                 </ul>
             </form>
