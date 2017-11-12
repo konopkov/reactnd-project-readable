@@ -74,7 +74,7 @@ class PostForm extends Component {
                         <label htmlFor='post'>Post:</label>
                     </li>
                     <li>
-                        <textarea rows='10' cols='50' id='post' placeholder='Your new post. Here.' value={this.state.value}
+                        <textarea rows='10' cols='50' id='post' placeholder='Your new post. Here.' value={this.state.textAreaValue}
                                   onChange={this.onTextAreaChange}/>
                     </li>
                     <li>
