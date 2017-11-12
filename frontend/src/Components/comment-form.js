@@ -32,7 +32,11 @@ class CommentForm extends Component {
             author: this.state.inputValue,
             parentId: this.props.parentId
         };
-        this.onSumbitComment(comment)
+        this.onSumbitComment(comment);
+        this.setState(() => ({
+            inputValue: '',
+            textAreaValue: ''
+        }))
     }
 
     render() {
