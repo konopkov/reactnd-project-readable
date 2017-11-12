@@ -5,8 +5,6 @@ import ItemFooter from './item-footer'
 import ItemHeader from './item-header'
 import Editor from './editor'
 
-import {ApiPaths} from '../Utils/api'
-
 
 class Item extends Component {
     state = {
@@ -35,11 +33,11 @@ class Item extends Component {
                     item={item}
                 />
                 <h3 className='post__title'>
-                    <Link className='post__title_link' to={`/${ApiPaths.API_POSTS}/${item.id}`}>{item.title}</Link>
+                    <Link className='post__title_link' to={`/${item.category}/${item.id}`}>{item.title}</Link>
                 </h3>
                 <h4 className='post__category'>
                     <Link className='post__category_link'
-                          to={`/${ApiPaths.PAGE_CATEGORY}/${item.category}`}>{item.category}
+                          to={`/${item.category}`}>{item.category}
                     </Link>
                 </h4>
                 {!editorOpen && <div className='post__body'>
