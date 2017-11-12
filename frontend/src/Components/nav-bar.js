@@ -31,7 +31,7 @@ class Root extends Component {
                 </div>
 
                 <div className="main-navbar__section main-navbar__section_right">
-                    <Link className='btn btn_x-large btn_navbar_new-post' to={`/${ApiPaths.API_POSTS}/${ApiPaths.PAGE_NEW_POST}`}>New
+                    <Link className='btn btn_x-large btn_navbar_new-post' to={`/create/${ApiPaths.PAGE_NEW_POST}/post`}>New
                         post</Link>
                 </div>
             </div>

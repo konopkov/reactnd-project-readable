@@ -4,6 +4,8 @@ import {Route} from 'react-router-dom'
 import RootPage from './root-page'
 import PostPage from './post-page'
 
+import {ApiPaths} from '../Utils/api'
+
 
 class App extends Component {
 
@@ -25,6 +27,12 @@ class App extends Component {
                     exact path={`/:category/:id`}
                     render={({match}) => (
                         <PostPage id={match.params.id}/>
+                    )}
+                />
+                <Route
+                    exact path={`/create/${ApiPaths.PAGE_NEW_POST}/post`}
+                    render={({match}) => (
+                        <PostPage id={ApiPaths.PAGE_NEW_POST}/>
                     )}
                 />
                 <Route
