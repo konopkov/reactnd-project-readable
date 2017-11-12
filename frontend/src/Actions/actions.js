@@ -7,6 +7,7 @@ export const UPDATE_POST = 'UPDATE_POST';
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT';
+export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 export const CLEAR_COMMENTS = 'CLEAR_COMMENTS';
 export const SORT_POSTS = 'SORT_POSTS';
 export const SORT_COMMENTS = 'SORT_COMMENTS';
@@ -52,6 +53,11 @@ export const receiveComments = comments => ({
 
 export const receiveComment = comment => ({
     type: RECEIVE_COMMENT,
+    comment
+});
+
+export const updateComment = comment => ({
+    type: UPDATE_COMMENT,
     comment
 });
 
@@ -133,7 +139,7 @@ export const fetchCommentVote = (id, vote) => dispatch => (
 
 export const fetchNewComment = (comment) => dispatch => (
     PostsAPIUtil.fetchNewComment(comment)
-        .then((comment) => dispatch(addComment(comment)))
+        .then((comment) => dispatch(receiveComment(comment)))
 );
 
 export const fetchNewPost = (post) => dispatch => (
@@ -159,5 +165,5 @@ export const fetchUpdatePost = (post) => dispatch => (
 export const fetchUpdateComment = (comment) => dispatch => (
     PostsAPIUtil.fetchUpdateComment(comment)
         .then(() => PostsAPIUtil.fetchComment(comment.id))
-        .then((comment) => dispatch(receiveComment(comment)))
+        .then((comment) => dispatch(updateComment(comment)))
 );

@@ -7,6 +7,7 @@ import {
     RECEIVE_CATEGORIES,
     RECEIVE_COMMENTS,
     RECEIVE_COMMENT,
+    UPDATE_COMMENT,
     SORT_POSTS,
     SORT_COMMENTS,
     CLEAR_COMMENTS,
@@ -108,6 +109,10 @@ const comments = (state = InitialCommentsState, action) => {
             return {...state, comments: action.comments};
 
         case RECEIVE_COMMENT:
+
+            return {...state, comments: [...state.comments, action.comment]};
+
+        case UPDATE_COMMENT:
 
             const comments = [];
             for (const comment of state.comments) {
