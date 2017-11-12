@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import PostBody from './PostBody'
+import Post from './Item'
 import PostForm from './PostForm'
 import NavBar from '../nav/NavBar'
-import PostsList from '../post/PostsList'
-import SortingPanel from '../root/SortingPanel'
+import CommentsList from './ItemsList'
+import CommentsSortingPanel from '../root/SortingPanel'
 import CommentForm from './CommentForm';
 
 import {
@@ -23,7 +23,7 @@ import {
 } from '../root/actions'
 
 
-class Post extends Component {
+class PostPage extends Component {
     constructor(props) {
         super(props);
     }
@@ -78,26 +78,26 @@ class Post extends Component {
         return (
             <div className='layout'>
                 <NavBar/>
-                <PostBody
-                    post={this.props.post}
+                <Post
+                    item={this.props.post}
                     onVoteUp={this.props.postVoteUp}
                     onVoteDown={this.props.postVoteDown}
                     onEdit={this.props.postEdit}
                     onDelete={this.props.postDelete}
                 >
-                </PostBody>
-                <SortingPanel
+                </Post>
+                <h3>Comments ({this.props.post.commentCount})</h3>
+                <CommentForm
+                    parentId={this.props.post.id}
+                    onSumbitComment={this.props.fetchNewComment}
+                />
+                <CommentsSortingPanel
                     sortingOrder={this.props.sortingOrder}
                     onSortingVote={this.props.sortCommentsByVoteScore}
                     onSortingTimestamp={this.props.sortCommentsByTimestamp}
                 />
-                <h3>Comments ({this.props.post.commentCount})</h3>
-                <CommentForm
-                    post={this.props.post}
-                    onSumbitComment={this.props.fetchNewComment}
-                />
-                <PostsList
-                    posts={this.orderComments()}
+                <CommentsList
+                    items={this.orderComments()}
                     onVoteUp={this.props.commentVoteUp}
                     onVoteDown={this.props.commentVoteDown}
                     onEdit={this.props.commentEdit}
@@ -138,4 +138,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Post)
+)(PostPage)

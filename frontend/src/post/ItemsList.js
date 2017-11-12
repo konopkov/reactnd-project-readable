@@ -1,21 +1,21 @@
 import React from 'react'
-import PostBody from './PostBody'
+import Item from './Item'
 
 
-const PostsList = ({posts, onVoteUp, onVoteDown, onEdit, onDelete}) => {
+const ItemsList = ({items, onVoteUp, onVoteDown, onEdit, onDelete}) => {
 
-    if (posts.length === 0) {
-        return <p>No posts</p>
+    if (items.length === 0) {
+        return <p>No items</p>
     }
 
     return (
         <div className='posts_list'>
             <ul className='content-list content-list_posts'>
-                {posts.map((post) => (
-                    <li className='content-list__item content-list__item_post' key={post.id}>
-                        <PostBody
-                            key={post.id}
-                            post={post}
+                {items.map((item) => (
+                    <li className='content-list__item content-list__item_post' key={item.id}>
+                        <Item
+                            key={item.id}
+                            item={item}
                             onVoteUp={onVoteUp}
                             onVoteDown={onVoteDown}
                             onEdit={onEdit}
@@ -28,4 +28,4 @@ const PostsList = ({posts, onVoteUp, onVoteDown, onEdit, onDelete}) => {
     )
 };
 
-export default PostsList
+export default ItemsList

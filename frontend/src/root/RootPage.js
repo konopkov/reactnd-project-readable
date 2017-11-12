@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 import NavBar from '../nav/NavBar'
-import PostsList from '../post/PostsList'
-import SortingPanel from './SortingPanel'
+import PostsList from '../post/ItemsList'
+import PostsSortingPanel from './SortingPanel'
 import {fetchPosts, sortPosts, fetchPostVote, fetchDeletePost, SortingMethods, VoteVariants} from "./actions"
 
 
@@ -45,13 +45,13 @@ class Root extends Component {
         return (
             <div className='layout'>
                 <NavBar/>
-                <SortingPanel
+                <PostsSortingPanel
                     sortingOrder={this.props.sortingOrder}
                     onSortingVote={this.props.sortPostsByVoteScore}
                     onSortingTimestamp={this.props.sortPostsByTimestamp}
                 />
                 <PostsList
-                    posts={this.orderPosts()}
+                    items={this.orderPosts()}
                     onVoteUp={this.props.postVoteUp}
                     onVoteDown={this.props.postVoteDown}
                     onEdit={this.props.postEdit}

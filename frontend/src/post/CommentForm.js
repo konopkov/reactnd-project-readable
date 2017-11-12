@@ -30,7 +30,7 @@ class CommentForm extends Component {
             timestamp: Date.now(),
             body: this.state.textAreaValue,
             author: this.state.inputValue,
-            parentId: this.props.post.id
+            parentId: this.props.parentId
         };
         this.onSumbitComment(comment)
     }

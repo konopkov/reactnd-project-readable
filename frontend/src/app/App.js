@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {Route} from 'react-router-dom'
 
-import Root from '../root/Root'
-import Post from '../post/Post'
+import RootPage from '../root/RootPage'
+import PostPage from '../post/PostPage'
 
 import './App.css'
 
@@ -20,19 +20,19 @@ class App extends Component {
                 <Route
                     exact path='/'
                     render={() => (
-                        <Root/>
+                        <RootPage/>
                     )}
                 />
                 <Route
                     path='/posts/:id'
                     render={({ match }) => (
-                        <Post id={match.params.id}/>
+                        <PostPage id={match.params.id}/>
                     )}
                 />
                 <Route
                     path='/category/:id'
                     render={({ match }) => (
-                        <Root category={match.params.id}/>
+                        <RootPage category={match.params.id}/>
                     )}
                 />
 
