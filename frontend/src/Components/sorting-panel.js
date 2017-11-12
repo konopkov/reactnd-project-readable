@@ -1,5 +1,5 @@
 import React from 'react'
-import {SortingMethods} from "./actions"
+import {SortingMethods} from "../Actions/actions"
 
 
 const SortingPanel = ({sortingOrder, onSortingVote, onSortingTimestamp}) => {

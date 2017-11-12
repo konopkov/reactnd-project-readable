@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom';
 
-import CategoriesList from '../category/CategoriesList';
-import {fetchCategories} from "../root/actions";
+import CategoriesList from './categories-list';
+import {fetchCategories} from "../Actions/actions";
 
 
 class Root extends Component {

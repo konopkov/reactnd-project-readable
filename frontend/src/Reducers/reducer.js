@@ -14,7 +14,7 @@ import {
     SortingMethods,
     VOTE_POST,
     VoteVariants, VOTE_COMMENT
-} from './actions'
+} from '../Actions/actions'
 
 
 const InitialPostsState = {

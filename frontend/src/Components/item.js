@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom';
 
-import ItemFooter from './ItemFooter'
-import ItemHeader from './ItemHeader'
-import Editor from './Editor'
+import ItemFooter from './item-footer'
+import ItemHeader from './item-header'
+import Editor from './editor'
 
 class Item extends Component {
     state = {

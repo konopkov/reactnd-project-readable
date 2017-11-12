@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import Post from './Item'
-import PostForm from './PostForm'
-import NavBar from '../nav/NavBar'
-import CommentsList from './ItemsList'
-import CommentsSortingPanel from '../root/SortingPanel'
-import CommentForm from './CommentForm';
+import Post from './item'
+import PostForm from './post-form'
+import NavBar from './nav-bar'
+import CommentsList from './items-list'
+import CommentsSortingPanel from './sorting-panel'
+import CommentForm from './comment-form';
 
 
 import {
@@ -23,7 +23,7 @@ import {
     fetchUpdateComment,
     VoteVariants,
     SortingMethods
-} from '../root/actions'
+} from '../Actions/actions'
 
 
 class PostPage extends Component {

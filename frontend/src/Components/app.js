@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import {Route} from 'react-router-dom'
 
-import RootPage from '../root/RootPage'
-import PostPage from '../post/PostPage'
-
-import './App.css'
+import RootPage from './root-page'
+import PostPage from './post-page'
 
 
 class App extends Component {
