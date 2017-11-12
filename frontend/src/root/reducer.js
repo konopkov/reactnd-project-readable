@@ -4,6 +4,7 @@ import {
     RECEIVE_POST,
     RECEIVE_CATEGORIES,
     RECEIVE_COMMENTS,
+    RECEIVE_COMMENT,
     SORT_POSTS,
     SORT_COMMENTS,
     ADD_COMMENT,
@@ -84,6 +85,18 @@ const comments = (state = InitialCommentsState, action) => {
         case RECEIVE_COMMENTS:
 
             return {...state, comments: action.comments};
+
+        case RECEIVE_COMMENT:
+
+            const comments = [];
+            for (const comment of state.comments) {
+                comment.id === action.comment.id
+                    ? comments.push(action.comment)
+                    : comments.push(comment)
+
+            }
+
+            return {...state, comments: comments};
 
         case SORT_COMMENTS:
 
