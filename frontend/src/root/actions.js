@@ -9,6 +9,8 @@ export const SORT_COMMENTS = 'SORT_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const VOTE_POST = 'VOTE_POST';
 export const VOTE_COMMENT = 'VOTE_COMMENT';
+export const DELETE_POST = 'DELETE_POST';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 export const SortingMethods = {
     VOTE_SCORE: 'VOTE_SCORE',
@@ -67,6 +69,16 @@ export const receiveCategories = categories => ({
     categories
 });
 
+export const deletePost = (id) => ({
+    type: DELETE_POST,
+    id
+});
+
+export const deleteComment = (id) => ({
+    type: DELETE_COMMENT,
+    id
+});
+
 export const fetchPosts = () => dispatch => (
     PostsAPIUtil.fetchPosts()
         .then(posts => dispatch(receivePosts(posts)))
@@ -105,4 +117,14 @@ export const fetchNewComment = (comment) => dispatch => (
 export const fetchNewPost = (post) => dispatch => (
     PostsAPIUtil.fetchNewPost(post)
         .then((post) => dispatch(receivePost(post)))
+);
+
+export const fetchDeletePost = (id) => dispatch => (
+    PostsAPIUtil.fetchDeletePost(id)
+        .then(() => dispatch(deletePost(id)))
+);
+
+export const fetchDeleteComment = (id) => dispatch => (
+    PostsAPIUtil.fetchDeleteComment(id)
+        .then(() => dispatch(deleteComment(id)))
 );

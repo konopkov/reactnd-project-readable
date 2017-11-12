@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import PostFooter from './PostFooter'
 
 
-const PostBody = ({post, onVoteUp, onVoteDown}) => {
+const PostBody = ({post, onVoteUp, onVoteDown, onEdit, onDelete}) => {
 
     return (
         <article className='post'>
@@ -30,6 +30,8 @@ const PostBody = ({post, onVoteUp, onVoteDown}) => {
                     post={post}
                     onVoteUp={onVoteUp}
                     onVoteDown={onVoteDown}
+                    onEdit={onEdit}
+                    onDelete={onDelete}
                 />
             </footer>
         </article>

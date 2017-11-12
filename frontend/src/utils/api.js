@@ -5,6 +5,7 @@ const ApiPaths = {
     API_COMMENTS: 'comments'
 };
 const API_HEADERS_GET = { headers: { 'Authorization': 'app' }};
+const API_HEADERS_DELETE = { headers: { 'Authorization': 'app' }, method: 'DELETE'};
 const API_HEADERS_POST = { headers: { 'Authorization': 'app', 'Content-Type': 'application/json' }};
 const voteRequest = (vote) => {
     return {headers: API_HEADERS_POST.headers, method: 'POST', body: JSON.stringify({
@@ -59,3 +60,7 @@ export const fetchNewComment = (comment) => fetch(`${SERVER_URL}/${ApiPaths.API_
 
 export const fetchNewPost = (post) => fetch(`${SERVER_URL}/${ApiPaths.API_POSTS}`, newPostRequest(post))
     .then((res) => res.json());
+
+export const fetchDeletePost = (id) => fetch(`${SERVER_URL}/${ApiPaths.API_POSTS}/${id}`, API_HEADERS_DELETE);
+
+export const fetchDeleteComment = (id) => fetch(`${SERVER_URL}/${ApiPaths.API_COMMENTS}/${id}`, API_HEADERS_DELETE);

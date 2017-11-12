@@ -2,7 +2,8 @@ import React from 'react'
 import PostBody from './PostBody'
 
 
-const PostsList = ({posts, onVoteUp, onVoteDown}) => {
+const PostsList = ({posts, onVoteUp, onVoteDown, onEdit, onDelete}) => {
+
     if (posts.length === 0) {
         return <p>No posts</p>
     }
@@ -17,6 +18,8 @@ const PostsList = ({posts, onVoteUp, onVoteDown}) => {
                             post={post}
                             onVoteUp={onVoteUp}
                             onVoteDown={onVoteDown}
+                            onEdit={onEdit}
+                            onDelete={onDelete}
                         />
                     </li>
                 ))}

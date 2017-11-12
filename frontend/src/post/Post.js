@@ -16,6 +16,8 @@ import {
     sortComments,
     fetchNewComment,
     fetchNewPost,
+    fetchDeleteComment,
+    fetchDeletePost,
     VoteVariants,
     SortingMethods
 } from '../root/actions'
@@ -80,6 +82,8 @@ class Post extends Component {
                     post={this.props.post}
                     onVoteUp={this.props.postVoteUp}
                     onVoteDown={this.props.postVoteDown}
+                    onEdit={this.props.postEdit}
+                    onDelete={this.props.postDelete}
                 >
                 </PostBody>
                 <SortingPanel
@@ -96,6 +100,8 @@ class Post extends Component {
                     posts={this.orderComments()}
                     onVoteUp={this.props.commentVoteUp}
                     onVoteDown={this.props.commentVoteDown}
+                    onEdit={this.props.commentEdit}
+                    onDelete={this.props.commentDelete}
                 />
             </div>
         )
@@ -121,7 +127,11 @@ const mapDispatchToProps = (dispatch) => {
         sortCommentsByVoteScore: () => dispatch(sortComments(SortingMethods.VOTE_SCORE)),
         sortCommentsByTimestamp: () => dispatch(sortComments(SortingMethods.TIMESTAMP)),
         fetchNewComment: (comment) => dispatch(fetchNewComment(comment)),
-        fetchNewPost: (post) => dispatch(fetchNewPost(post))
+        fetchNewPost: (post) => dispatch(fetchNewPost(post)),
+        postEdit: (id) => alert(id),
+        postDelete: (id) => dispatch(fetchDeletePost(id)),
+        commentEdit: (id) => alert(id),
+        commentDelete: (id) => dispatch(fetchDeleteComment(id))
     }
 };
 

@@ -7,6 +7,8 @@ import {
     SORT_POSTS,
     SORT_COMMENTS,
     ADD_COMMENT,
+    DELETE_POST,
+    DELETE_COMMENT,
     SortingMethods,
     VOTE_POST,
     VoteVariants, VOTE_COMMENT
@@ -50,6 +52,10 @@ const posts = (state = InitialPostsState, action) => {
         case SORT_POSTS:
 
             return {...state, sortingOrder: action.sortMethod};
+
+        case DELETE_POST:
+
+            return {...state, posts: state.posts.filter(post => post.id !== action.id)};
 
         default:
 
@@ -100,6 +106,10 @@ const comments = (state = InitialCommentsState, action) => {
                     }
                 })
             };
+
+        case DELETE_COMMENT:
+
+            return {...state, comments: state.comments.filter(comment => comment.id !== action.id)};
 
         default:
             return state
