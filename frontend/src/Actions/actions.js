@@ -1,7 +1,8 @@
-import * as PostsAPIUtil from '../utils/api';
+import * as PostsAPIUtil from '../Utils/api';
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const RECEIVE_POST = 'RECEIVE_POST';
+export const CLEAR_POSTS = 'CLEAR_POSTS';
 export const UPDATE_POST = 'UPDATE_POST';
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
@@ -32,6 +33,10 @@ export const receivePosts = posts => ({
 export const receivePost = post => ({
     type: RECEIVE_POST,
     post
+});
+
+export const clearPosts = () => ({
+    type: CLEAR_POSTS
 });
 
 export const updatePost = post => ({

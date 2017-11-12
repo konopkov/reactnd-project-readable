@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {uuidv4} from '../utils/uuid'
+import {uuidv4} from '../Utils/uuid'
 
 class CommentForm extends Component {
     constructor(props) {

@@ -2,6 +2,7 @@ import {combineReducers} from 'redux'
 import {
     RECEIVE_POSTS,
     RECEIVE_POST,
+    CLEAR_POSTS,
     UPDATE_POST,
     RECEIVE_CATEGORIES,
     RECEIVE_COMMENTS,
@@ -35,6 +36,12 @@ const posts = (state = InitialPostsState, action) => {
 
             return {
                 ...state, posts: [action.post]
+            };
+
+        case CLEAR_POSTS:
+
+            return {
+                ...state, posts: []
             };
 
         case UPDATE_POST:

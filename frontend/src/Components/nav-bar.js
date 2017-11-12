@@ -3,7 +3,9 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom';
 
 import CategoriesList from './categories-list';
-import {fetchCategories} from "../Actions/actions";
+import {fetchCategories} from '../Actions/actions';
+
+import {ApiPaths} from '../Utils/api'
 
 
 class Root extends Component {
@@ -29,7 +31,7 @@ class Root extends Component {
                 </div>
 
                 <div className="main-navbar__section main-navbar__section_right">
-                    <Link className='btn btn_x-large btn_navbar_new-post' to='/posts/new'>New post</Link>
+                    <Link className='btn btn_x-large btn_navbar_new-post' to={`/${ApiPaths.PAGE_NEW_POST}`}>New post</Link>
                 </div>
             </div>
         )

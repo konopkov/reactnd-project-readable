@@ -8,6 +8,7 @@ import CommentsList from './items-list'
 import CommentsSortingPanel from './sorting-panel'
 import CommentForm from './comment-form';
 
+import {ApiPaths} from '../Utils/api'
 
 import {
     fetchPost,
@@ -21,6 +22,7 @@ import {
     fetchDeletePost,
     fetchUpdatePost,
     fetchUpdateComment,
+    clearPosts,
     VoteVariants,
     SortingMethods
 } from '../Actions/actions'
@@ -33,9 +35,11 @@ class PostPage extends Component {
     }
 
     componentDidMount() {
-        if (this.props.id !== 'new') {
+        if (this.props.id !== ApiPaths.PAGE_NEW_POST) {
             this.props.fetchPost(this.props.id);
             this.props.fetchComments(this.props.id);
+        } else {
+            this.props.clearPosts()
         }
     }
 
@@ -66,7 +70,7 @@ class PostPage extends Component {
             commentVoteUp, commentVoteDown, commentEdit, commentDelete, fetchNewComment
         } = this.props;
 
-        if (id === 'new' && (!post || Object.keys(post).length === 0)) {
+        if (id === ApiPaths.PAGE_NEW_POST && (!post || Object.keys(post).length === 0)) {
 
             return (
                 <div className='layout'>
@@ -129,6 +133,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchPost: (id) => dispatch(fetchPost(id)),
+        clearPosts: () => dispatch(clearPosts()),
         fetchComments: (id) => dispatch(fetchComments(id)),
         postVoteUp: (id) => dispatch(fetchPostVote(id, VoteVariants.VOTE_UP)),
         postVoteDown: (id) => dispatch(fetchPostVote(id, VoteVariants.VOTE_DOWN)),

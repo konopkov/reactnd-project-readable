@@ -1,9 +1,13 @@
-const SERVER_URL = 'http://localhost:3001';
-const ApiPaths = {
+export const ApiPaths = {
     API_POSTS: 'posts',
     API_CATEGORIES: 'categories',
-    API_COMMENTS: 'comments'
+    API_COMMENTS: 'comments',
+    PAGE_CATEGORY: 'category',
+    PAGE_NEW_POST: 'new',
 };
+
+const SERVER_URL = 'http://localhost:3001';
+
 const API_HEADERS_GET = {headers: {'Authorization': 'app'}};
 const API_HEADERS_DELETE = {headers: {'Authorization': 'app'}, method: 'DELETE'};
 const API_HEADERS_POST = {headers: {'Authorization': 'app', 'Content-Type': 'application/json'}};
